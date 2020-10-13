@@ -61,6 +61,9 @@ public class ShapeFactory
                 this.stroke = new BasicStroke(3.0f);
                 break;
             }
+            case 2: 
+                this.stroke = new BasicStroke(1.0f);
+                break;
             case 3: {
                 break;
             }
