@@ -21,29 +21,48 @@ public class ShapeFactory
     public int width;
     public int height;
     
+    
+    enum ShapeType {
+        HEXAGON,
+        STAR,
+        SQUARE,
+        TRIANGLE,
+        PIE
+    }
+    
+    enum ShapeKind {
+        STROKE3,
+        STROKE1,
+        NONE, 
+        STROKE7,
+        GRADIENT,
+        RED
+    }
+    
     /**
-      * ctor accepts shape type that defines kind of shape and it's paint parameters. e.g. shape_type = 21, kind is 2, paint param is 1.
-      * @param int shape_type
+      * ctor accepts shape type that defines kind of shape and it's paint parameters. e.g. shapeType = 21, kind is 2, paint param is 1.
+      * @param int shapeType
+      * @param int shapeParam
       * @throws Error 
     */
-    public ShapeFactory(final int shape_type) {
+    public ShapeFactory(final ShapeType shapeType, final ShapeKind shapeParam) {
         this.width = 25;
         this.height = 25;
         this.stroke = new BasicStroke(3.0f);
-        switch (shape_type / 10) {
-            case 1: {
+        switch (shapeType) {
+            case HEXAGON: {
                 this.shape = createStar(3, new Point(0, 0), this.width / 2.0, this.width / 2.0);
                 break;
             }
-            case 3: {
+            case STAR: {
                 this.shape = createStar(5, new Point(0, 0), this.width / 2.0, this.width / 4.0);
                 break;
             }
-            case 5: {
+            case SQUARE: {
                 this.shape = new Rectangle2D.Double(-this.width / 2.0, -this.height / 2.0, this.width, this.height);
                 break;
             }
-            case 7: {
+            case TRIANGLE: {
                 final GeneralPath path = new GeneralPath();
                 final double tmp_height = Math.sqrt(2.0) / 2.0 * this.height;
                 path.moveTo(-this.width / 2, -tmp_height);
@@ -53,7 +72,7 @@ public class ShapeFactory
                 this.shape = path;
                 break;
             }
-            case 9: {
+            case PIE: {
                 this.shape = new Arc2D.Double(-this.width / 2.0, -this.height / 2.0, this.width, this.height, 30.0, 300.0, 2);
                 break;
             }
@@ -61,26 +80,26 @@ public class ShapeFactory
                 throw new Error("type is nusupported");
             }
         }
-        switch (shape_type % 10) {
-            case 1: {
+        switch (shapeParam) {
+            case STROKE3: {
                 this.stroke = new BasicStroke(3.0f);
                 break;
             }
-            case 2: 
+            case STROKE1: 
                 this.stroke = new BasicStroke(1.0f);
                 break;
-            case 3: {
+            case NONE: {
                 break;
             }
-            case 4: {
+            case STROKE7: {
                 this.stroke = new BasicStroke(7.0f);
                 break;
             }
-            case 7: {
+            case  GRADIENT: {
                 this.paint = new GradientPaint((float)(-this.width), (float)(-this.height), Color.white, (float)this.width, (float)this.height, Color.gray, true);
                 break;
             }
-            case 8: {
+            case RED: {
                 this.paint = Color.red;
                 break;
             }

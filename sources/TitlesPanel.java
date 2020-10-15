@@ -20,12 +20,15 @@ public class TitlesPanel extends JPanel implements ActionListener
     private Timer animation;
     private boolean is_done;
     private int start_angle;
-    private int shape;
+    private ShapeFactory.ShapeType shapeType;
+    private ShapeFactory.ShapeKind shapeKind;
     
-    public TitlesPanel(final int _shape) {
+    public TitlesPanel(ShapeFactory.ShapeType _shapeType, ShapeFactory.ShapeKind _shapeKind) {
         this.start_angle = 0;
         this.is_done = true;
-        this.shape = _shape;
+        this.shapeType = _shapeType;
+        this.shapeKind = _shapeKind;
+        
         (this.animation = new Timer(50, this)).setInitialDelay(50);
         this.animation.start();
     }
@@ -44,7 +47,7 @@ public class TitlesPanel extends JPanel implements ActionListener
         final Insets insets = this.getInsets();
         final int w = size.width - insets.left - insets.right;
         final int h = size.height - insets.top - insets.bottom;
-        final ShapeFactory shape = new ShapeFactory(this.shape);
+        final ShapeFactory shape = new ShapeFactory(this.shapeType, this.shapeKind);
         this.g2d.setStroke(shape.stroke);
         this.g2d.setPaint(shape.paint);
         double angle = this.start_angle++;
