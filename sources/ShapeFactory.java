@@ -41,9 +41,9 @@ public class ShapeFactory
     
     /**
       * ctor accepts shape type that defines kind of shape and it's paint parameters. e.g. shapeType = 21, kind is 2, paint param is 1.
-      * @param int shapeType
-      * @param int shapeParam
-      * @throws Error 
+      * @param shapeType type of shape
+      * @param shapeParam kind of shape
+      * @throws Error if wrong arguments
     */
     public ShapeFactory(final ShapeType shapeType, final ShapeKind shapeParam) {
         this.width = 25;
@@ -111,11 +111,11 @@ public class ShapeFactory
     
     /**
       * method for creating creating star
-      * @param int arms Arms count
-      * @param Point center Center of star
-      * @param double rOuter Length of edge
-      * @param double rInner Distance bettwen center and edge point
-      * @return Shape 
+      * @param arms Arms count
+      * @param center Center of star
+      * @param rOuter Length of edge
+      * @param rInner Distance bettwen center and edge point
+      * @return Created shape 
     */  
     private static Shape createStar(final int arms, final Point center, final double rOuter, final double rInner) {
         final double angle = 3.141592653589793 / arms;
